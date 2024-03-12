@@ -21,4 +21,19 @@ class StoreData {
       'name': 'Flutter Upload Video'
     });
   }
+
+  Future<String> uploadImage(String imageUrl) async {
+    Reference ref = storage.ref().child('images/${DateTime.now()}.jpg');
+    await ref.putFile(File(imageUrl));
+    String downloadUrl = await ref.getDownloadURL();
+    return downloadUrl;
+  }
+
+  Future<void> saveImage(String imageDownloadUrl) async {
+    await firestore.collection('images').add({
+      'url': imageDownloadUrl,
+      'timestamp': FieldValue.serverTimestamp(),
+      'name': 'Uploaded Image'
+    });
+  }
 }
