@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "200801003138",
+    "project_id": "flutter-upload-image-video",
+    "storage_bucket": "flutter-upload-image-video.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:200801003138:android:0fad644961094c6a22369b",
+        "android_client_info": {
+          "package_name": "com.example.flutter_file_upload_image_video"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyClxH6jyOn64xQBbaCiVO3XjiTufbVHtqk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
