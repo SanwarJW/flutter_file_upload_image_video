@@ -10,7 +10,6 @@ class VideoPreviewWidget extends StatefulWidget {
   VideoPreviewWidget(
       {super.key,
       required this.videoPlayerController,
-      required this.downloadUrl,
       required this.videoPath});
 
   @override
@@ -64,7 +63,7 @@ class _VideoPreviewWidgetState extends State<VideoPreviewWidget> {
   }
 
   void uploadVideo() async {
-    widget.downloadUrl = await StoreData().uploadFile(widget.videoPath!);
+    widget.downloadUrl = await StoreData().uploadVideo(widget.videoPath!);
     await StoreData().saveVideo(widget.downloadUrl!);
     setState(() {
       widget.videoPath = null;

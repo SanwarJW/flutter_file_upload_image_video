@@ -7,7 +7,7 @@ final FirebaseStorage storage = FirebaseStorage.instance;
 final FirebaseFirestore firestore = FirebaseFirestore.instance;
 
 class StoreData {
-  Future<String> uploadFile(String videoUrl) async {
+  Future<String> uploadVideo(String videoUrl) async {
     Reference ref = storage.ref().child('videos/${DateTime.now()}.mp4');
     await ref.putFile(File(videoUrl));
     String downloadUrl = await ref.getDownloadURL();

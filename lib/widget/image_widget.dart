@@ -21,7 +21,7 @@ class ImagePreviewWidget extends StatefulWidget {
 class _ImagePreviewWidgetState extends State<ImagePreviewWidget> {
   @override
   Widget build(BuildContext context) {
-    return widget.imageFile != null
+    return widget.imagePath != null
         ? Container(
             padding: const EdgeInsets.all(10),
             child: Column(
@@ -39,7 +39,7 @@ class _ImagePreviewWidgetState extends State<ImagePreviewWidget> {
             ),
           )
         : const Center(
-            child: CircularProgressIndicator(),
+            child: Text('Upload successfully'),
           );
   }
 
