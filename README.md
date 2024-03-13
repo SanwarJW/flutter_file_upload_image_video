@@ -10,6 +10,7 @@ This Flutter project allows users to upload photos and videos to Firebase storag
 
 ## Video preview
 <video controls src="Screen Recording 2024-03-13 at 2.49.39 PM.mp4" title="Demo Screen Recording"></video>
+
 ## Installation
 
 1. Clone the repository:
