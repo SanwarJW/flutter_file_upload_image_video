@@ -1,16 +1,18 @@
-# flutter_file_upload_image_video
+# Flutter Firebase File Upload
 
-A new Flutter project.
+This Flutter project allows users to upload photos and videos to Firebase storage. It ensures that the file size is less than 10 MB; otherwise, it displays a snack bar to notify the user.
 
-## Getting Started
+## Features
 
-This project is a starting point for a Flutter application.
+- Upload photos and videos to Firebase storage.
+- Check file size before uploading to ensure it's less than 10 MB.
+- Display a snack bar if the file size exceeds the limit.
 
-A few resources to get you started if this is your first Flutter project:
+## Video preview
+[Video preview](<../../../Desktop/Screen Recording 2024-03-13 at 2.49.39 PM.mov>)
+## Installation
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+1. Clone the repository:
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+```bash
+git clone https://github.com/SanwarJW/flutter_file_upload_image_video.git
