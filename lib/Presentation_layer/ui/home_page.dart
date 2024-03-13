@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_file_upload_image_video/Presentation_layer/bloc/home_bloc.dart';
-import 'package:flutter_file_upload_image_video/widget/image_widget.dart';
-import 'package:flutter_file_upload_image_video/widget/video_widget.dart';
+import 'package:flutter_file_upload_image_video/Presentation_layer/ui/widget/image_widget.dart';
+import 'package:flutter_file_upload_image_video/Presentation_layer/ui/widget/video_widget.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -30,7 +30,7 @@ class _HomePageState extends State<HomePage> {
         ),
         body: BlocBuilder<HomeBloc, HomeState>(
           bloc: homeBloc,
-          buildWhen: (previous, current) => current is! HomeActionState,
+          buildWhen: (previous, current) => current is HomeHomeState,
           builder: (context, state) {
             switch (state.runtimeType) {
               case const (HomeInitialState):
@@ -45,8 +45,11 @@ class _HomePageState extends State<HomePage> {
 
               case const (HomeVideoSelectedState):
                 final homeVideoSelectedState = state as HomeVideoSelectedState;
+                print('size of a video $homeVideoSelectedState.videoSizeInMB');
                 return Center(
                     child: VideoPreviewWidget(
+                  homeBloc: homeBloc,
+                  videoSizeInMB: homeVideoSelectedState.videoSizeInMB,
                   videoPath: homeVideoSelectedState.videoPath,
                   videoPlayerController:
                       homeVideoSelectedState.videoPlayerController,
@@ -56,6 +59,8 @@ class _HomePageState extends State<HomePage> {
                 final homeImageSelectedState = state as HomeImageSelectedState;
                 return Center(
                   child: ImagePreviewWidget(
+                    imageSizeInMB: homeImageSelectedState.imageSizeInMB,
+                    homeBloc: homeBloc,
                     imagePath: homeImageSelectedState.imagePath,
                     imageFile: homeImageSelectedState.imageFile!,
                   ),
@@ -77,6 +82,7 @@ class _HomePageState extends State<HomePage> {
       children: [
         FloatingActionButton(
           onPressed: () {
+            print('video button clicked');
             homeBloc.add(HomeAddVideoButtonClickedEvent());
           },
           child: const Icon(Icons.video_call_outlined),
