@@ -9,7 +9,7 @@ This Flutter project allows users to upload photos and videos to Firebase storag
 - Display a snack bar if the file size exceeds the limit.
 
 ## Video preview
-[Video preview](<../../../Desktop/Screen Recording 2024-03-13 at 2.49.39 PM.mov>)
+[Video preview](<Screen Recording 2024-03-13 at 2.49.39 PM.mov>)
 ## Installation
 
 1. Clone the repository:
