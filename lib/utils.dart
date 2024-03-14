@@ -2,10 +2,10 @@ import 'package:image_picker/image_picker.dart';
 
 pickVideo() async {
   final picker = ImagePicker();
-  XFile? pickedFile;
+  XFile? pickedVideo;
   try {
-    pickedFile = await picker.pickVideo(source: ImageSource.gallery);
-    return pickedFile!.path;
+    pickedVideo = await picker.pickVideo(source: ImageSource.gallery);
+    return pickedVideo!.path;
   } catch (e) {
     print('error picking video $e');
   }
@@ -13,10 +13,10 @@ pickVideo() async {
 
 pickImage() async {
   final picker = ImagePicker();
-  XFile? pickedFile;
+  XFile? pickedImage;
   try {
-    pickedFile = await picker.pickImage(source: ImageSource.gallery);
-    return pickedFile!.path;
+    pickedImage = await picker.pickImage(source: ImageSource.gallery);
+    return pickedImage!.path;
   } catch (e) {
     print('error picking image $e');
   }

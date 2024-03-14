@@ -78,8 +78,9 @@ class _ImagePreviewWidgetState extends State<ImagePreviewWidget> {
   void uploadImage() async {
     if (widget.imageSizeInMB < 4) {
       widget.homeBloc.add(HomeImageWidgetUploadButtonClickedEvent());
-      String downloadUrl = await StoreData().uploadImage(widget.imagePath!);
-      await StoreData().saveImage(downloadUrl);
+      String downloadUrl =
+          await StoreData().uploadImageToStorage(widget.imagePath!);
+      await StoreData().saveImageToFirestore(downloadUrl);
       widget.homeBloc.add(HomeImageWidgetUploadSuccessEvent());
     } else {
       ScaffoldMessenger.of(context).showSnackBar(

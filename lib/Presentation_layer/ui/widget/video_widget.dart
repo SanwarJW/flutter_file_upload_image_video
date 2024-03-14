@@ -130,8 +130,9 @@ class _VideoPreviewWidgetState extends State<VideoPreviewWidget> {
   void uploadVideo() async {
     if (widget.videoSizeInMB < 10) {
       homeBloc.add(HomeVideoWidgetUploadButtonClickedEvent());
-      widget.downloadUrl = await StoreData().uploadVideo(widget.videoPath!);
-      await StoreData().saveVideo(widget.downloadUrl!);
+      widget.downloadUrl =
+          await StoreData().uploadVideoToStorage(widget.videoPath!);
+      await StoreData().saveVideoToFirestore(widget.downloadUrl!);
       homeBloc.add(HomeVideoWidgetUploadSuccessEvent());
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
