@@ -1,6 +1,7 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:io';
 
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_file_upload_image_video/Presentation_layer/bloc/home_bloc.dart';
@@ -76,16 +77,25 @@ class _ImagePreviewWidgetState extends State<ImagePreviewWidget> {
   }
 
   void uploadImage() async {
-    if (widget.imageSizeInMB < 4) {
-      widget.homeBloc.add(HomeImageWidgetUploadButtonClickedEvent());
-      String downloadUrl =
-          await StoreData().uploadImageToStorage(widget.imagePath!);
-      await StoreData().saveImageToFirestore(downloadUrl);
-      widget.homeBloc.add(HomeImageWidgetUploadSuccessEvent());
+    var connectivityResult = await (Connectivity().checkConnectivity());
+    if (connectivityResult != ConnectivityResult.none) {
+      if (widget.imageSizeInMB < 4) {
+        widget.homeBloc.add(HomeImageWidgetUploadButtonClickedEvent());
+        String downloadUrl =
+            await StoreData().uploadImageToStorage(widget.imagePath!);
+        await StoreData().saveImageToFirestore(downloadUrl);
+        widget.homeBloc.add(HomeImageWidgetUploadSuccessEvent());
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text('Image size should be less than 10MB'),
+          ),
+        );
+      }
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
-          content: Text('Image size should be less than 10MB'),
+          content: Text('No internet connection'),
         ),
       );
     }

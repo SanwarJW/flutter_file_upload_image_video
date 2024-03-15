@@ -1,3 +1,4 @@
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_file_upload_image_video/Presentation_layer/bloc/home_bloc.dart';
@@ -128,16 +129,26 @@ class _VideoPreviewWidgetState extends State<VideoPreviewWidget> {
   }
 
   void uploadVideo() async {
-    if (widget.videoSizeInMB < 10) {
-      homeBloc.add(HomeVideoWidgetUploadButtonClickedEvent());
-      widget.downloadUrl =
-          await StoreData().uploadVideoToStorage(widget.videoPath!);
-      await StoreData().saveVideoToFirestore(widget.downloadUrl!);
-      homeBloc.add(HomeVideoWidgetUploadSuccessEvent());
+    var connectivityResult = await (Connectivity().checkConnectivity());
+    // print(connectivityResult == ConnectivityResult.ethernet);
+    if (connectivityResult != ConnectivityResult.none) {
+      if (widget.videoSizeInMB < 10) {
+        homeBloc.add(HomeVideoWidgetUploadButtonClickedEvent());
+        widget.downloadUrl =
+            await StoreData().uploadVideoToStorage(widget.videoPath!);
+        await StoreData().saveVideoToFirestore(widget.downloadUrl!);
+        homeBloc.add(HomeVideoWidgetUploadSuccessEvent());
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text('Video size should be less than 10MB'),
+          ),
+        );
+      }
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
-          content: Text('Video size should be less than 10MB'),
+          content: Text('No internet connection'),
         ),
       );
     }
