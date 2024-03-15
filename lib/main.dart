@@ -1,6 +1,8 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_file_upload_image_video/Presentation_layer/ui/home_page.dart';
+import 'package:flutter_file_upload_image_video/Presentation_layer/home/ui/home_page.dart';
+import 'package:flutter_file_upload_image_video/Presentation_layer/image_list/ui/image_list.dart';
+import 'package:flutter_file_upload_image_video/Presentation_layer/video_list/ui/video_list.dart';
 import 'package:flutter_file_upload_image_video/firebase_options.dart';
 
 Future<void> main() async {
@@ -17,6 +19,11 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      routes: {
+        '/home': (context) => const HomePage(),
+        '/imageList': (context) => const ImageList(),
+        '/videoList': (context) => const VideoList(),
+      },
       title: 'Flutter Upload Image Video',
       theme: ThemeData(
         primarySwatch: Colors.orange,

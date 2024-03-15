@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_file_upload_image_video/Presentation_layer/bloc/home_bloc.dart';
-import 'package:flutter_file_upload_image_video/Presentation_layer/ui/home_page.dart';
+import 'package:flutter_file_upload_image_video/Presentation_layer/home/bloc/home_bloc.dart';
+import 'package:flutter_file_upload_image_video/Presentation_layer/home/ui/home_page.dart';
 import 'package:flutter_file_upload_image_video/store_data.dart';
 import 'package:lottie/lottie.dart';
 import 'package:video_player/video_player.dart';

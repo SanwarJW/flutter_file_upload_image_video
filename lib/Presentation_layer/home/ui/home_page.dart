@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_file_upload_image_video/Presentation_layer/bloc/home_bloc.dart';
-import 'package:flutter_file_upload_image_video/Presentation_layer/ui/widget/image_widget.dart';
-import 'package:flutter_file_upload_image_video/Presentation_layer/ui/widget/video_widget.dart';
+import 'package:flutter_file_upload_image_video/Presentation_layer/home/bloc/home_bloc.dart';
+import 'package:flutter_file_upload_image_video/Presentation_layer/home/ui/widget/image_widget.dart';
+import 'package:flutter_file_upload_image_video/Presentation_layer/home/ui/widget/video_widget.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -27,6 +27,24 @@ class _HomePageState extends State<HomePage> {
         appBar: AppBar(
           title: const Text('Flutter Upload Image Video'),
           backgroundColor: Colors.orange,
+          actions: [
+            IconButton(
+              onPressed: () {
+                Navigator.pushNamed(context, '/videoList');
+              },
+              icon: const Icon(
+                (Icons.video_library),
+              ),
+            ),
+            IconButton(
+              onPressed: () {
+                Navigator.pushNamed(context, '/imageList');
+              },
+              icon: const Icon(
+                (Icons.image),
+              ),
+            )
+          ],
         ),
         body: BlocBuilder<HomeBloc, HomeState>(
           bloc: homeBloc,
@@ -81,6 +99,7 @@ class _HomePageState extends State<HomePage> {
       mainAxisAlignment: MainAxisAlignment.end,
       children: [
         FloatingActionButton(
+          heroTag: "btn1",
           onPressed: () {
             print('video button clicked');
             homeBloc.add(HomeAddVideoButtonClickedEvent());
@@ -89,6 +108,7 @@ class _HomePageState extends State<HomePage> {
         ),
         const SizedBox(height: 10),
         FloatingActionButton(
+          heroTag: "btn2",
           onPressed: () {
             homeBloc.add(HomeAddImageButtonClickedEvent());
           },
