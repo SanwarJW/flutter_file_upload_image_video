@@ -7,17 +7,26 @@ part 'image_list_event.dart';
 part 'image_list_state.dart';
 
 class ImageListBloc extends Bloc<ImageListEvent, ImageListState> {
-  ImageListBloc() : super(ImageListInitialState(images: imageFetch())) {
+  Stream<QuerySnapshot<Map<String, dynamic>>>? imageListStream;
+  ImageListBloc() : super(ImageListLoadingState()) {
     on<ImageListInitialEvent>(_onImageListInitialEvent);
+    on<ImageListFetchEvent>(_onImageListFetchEvent);
   }
 
-  FutureOr<void> _onImageListInitialEvent(
-      ImageListInitialEvent event, Emitter<ImageListState> emit) {
+  Future<FutureOr<void>> _onImageListInitialEvent(
+      ImageListInitialEvent event, Emitter<ImageListState> emit) async {
     emit(ImageListInitialState(images: imageFetch()));
   }
-}
 
-imageFetch() async {
-  var images = FirebaseFirestore.instance.collection('images').snapshots();
-  return images;
+  FutureOr<void> _onImageListFetchEvent(
+      ImageListFetchEvent event, Emitter<ImageListState> emit) {
+    emit(ImageListLoadingState());
+    imageFetch();
+    emit(ImageListInitialState(images: imageListStream));
+  }
+
+  imageFetch() async {
+    var images = FirebaseFirestore.instance.collection('images').snapshots();
+    return imageListStream = images;
+  }
 }
